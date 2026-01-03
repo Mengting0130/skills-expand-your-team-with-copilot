@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode functionality - allows users to switch between light and dark themes
+  const themeToggle = document.getElementById("theme-toggle");
+  
+  // Check for saved theme preference in localStorage, or default to light mode
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+  
+  // Toggle dark mode when the button is clicked
+  themeToggle.addEventListener("click", () => {
+    // Toggle the dark-mode class on the body element
+    document.body.classList.toggle("dark-mode");
+    
+    // Save the user's preference to localStorage so it persists across page loads
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  });
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
