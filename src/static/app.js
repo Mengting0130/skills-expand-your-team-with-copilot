@@ -520,6 +520,25 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Create share buttons - this allows users to share activities with their friends on social media
+    const shareButtons = `
+      <div class="share-buttons">
+        <span class="share-label">Share:</span>
+        <button class="share-button twitter-share" data-activity="${name}" title="Share on Twitter/X">
+          <span class="share-icon">𝕏</span>
+        </button>
+        <button class="share-button facebook-share" data-activity="${name}" title="Share on Facebook">
+          <span class="share-icon">f</span>
+        </button>
+        <button class="share-button email-share" data-activity="${name}" title="Share via Email">
+          <span class="share-icon">✉</span>
+        </button>
+        <button class="share-button copy-link" data-activity="${name}" title="Copy Link">
+          <span class="share-icon">🔗</span>
+        </button>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -529,6 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
       </p>
       ${capacityIndicator}
+      ${shareButtons}
       <div class="participants-list">
         <h5>Current Participants:</h5>
         <ul>
@@ -576,6 +596,55 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButtons = activityCard.querySelectorAll(".delete-participant");
     deleteButtons.forEach((button) => {
       button.addEventListener("click", handleUnregister);
+    });
+
+    // Add click handlers for share buttons - this lets users share activities on social media
+    const twitterShareBtn = activityCard.querySelector(".twitter-share");
+    const facebookShareBtn = activityCard.querySelector(".facebook-share");
+    const emailShareBtn = activityCard.querySelector(".email-share");
+    const copyLinkBtn = activityCard.querySelector(".copy-link");
+
+    // Twitter/X share - opens Twitter with pre-filled text about the activity
+    twitterShareBtn.addEventListener("click", () => {
+      const shareText = `Check out ${name} at Mergington High School! ${details.description} Schedule: ${formattedSchedule}`;
+      const activityUrl = `${window.location.origin}${window.location.pathname}#activity-${encodeURIComponent(name)}`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(activityUrl)}`;
+      window.open(twitterUrl, '_blank');
+    });
+
+    // Facebook share - opens Facebook share dialog with the activity URL
+    facebookShareBtn.addEventListener("click", () => {
+      const activityUrl = `${window.location.origin}${window.location.pathname}#activity-${encodeURIComponent(name)}`;
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(activityUrl)}`;
+      window.open(facebookUrl, '_blank');
+    });
+
+    // Email share - opens email client with pre-filled subject and body
+    emailShareBtn.addEventListener("click", () => {
+      const activityUrl = `${window.location.origin}${window.location.pathname}#activity-${encodeURIComponent(name)}`;
+      const subject = `Check out ${name} at Mergington High School`;
+      const body = `Hi,\n\nI thought you might be interested in this activity at Mergington High School:\n\n${name}\n${details.description}\n\nSchedule: ${formattedSchedule}\n\nLearn more: ${activityUrl}`;
+      const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    });
+
+    // Copy link - copies a direct link to the activity to the clipboard
+    copyLinkBtn.addEventListener("click", async () => {
+      const activityUrl = `${window.location.origin}${window.location.pathname}#activity-${encodeURIComponent(name)}`;
+      try {
+        await navigator.clipboard.writeText(activityUrl);
+        // Show temporary success message by changing the button text
+        const originalIcon = copyLinkBtn.querySelector('.share-icon').textContent;
+        copyLinkBtn.querySelector('.share-icon').textContent = '✓';
+        copyLinkBtn.style.backgroundColor = '#2e7d32';
+        setTimeout(() => {
+          copyLinkBtn.querySelector('.share-icon').textContent = originalIcon;
+          copyLinkBtn.style.backgroundColor = '';
+        }, 2000);
+      } catch (error) {
+        console.error('Failed to copy link:', error);
+        showMessage('Failed to copy link. Please try again.', 'error');
+      }
     });
 
     // Add click handler for register button (only when authenticated)

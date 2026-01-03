@@ -238,6 +238,81 @@ section h3 {
   background-color: var(--success);
 }
 
+/* Share Buttons - allow users to share activities with friends on social media */
+.share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Label for the share buttons section */
+.share-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* Individual share button styling */
+.share-button {
+  background-color: #f0f0f0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* Hover effect for share buttons */
+.share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Twitter/X button - uses black color for X branding */
+.twitter-share:hover {
+  background-color: #000000;
+  color: white;
+  border-color: #000000;
+}
+
+/* Facebook button - uses Facebook blue */
+.facebook-share:hover {
+  background-color: #1877f2;
+  color: white;
+  border-color: #1877f2;
+}
+
+/* Email button - uses a professional gray-blue */
+.email-share:hover {
+  background-color: #5f6368;
+  color: white;
+  border-color: #5f6368;
+}
+
+/* Copy link button - uses success green */
+.copy-link:hover {
+  background-color: #2e7d32;
+  color: white;
+  border-color: #2e7d32;
+}
+
+/* Icon styling inside share buttons */
+.share-icon {
+  font-size: 1rem;
+  display: inline-block;
+}
+
 /* Participants list */
 .participants-list {
   margin-top: 8px;
