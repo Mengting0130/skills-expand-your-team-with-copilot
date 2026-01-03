@@ -42,13 +42,15 @@ def get_activities(
         query["schedule_details.end_time"] = {"$lte": end_time}
     
     # Handle difficulty filter
-    # 'all' means only activities with no difficulty specified
+    # - When difficulty is None/empty string: No filtering applied (shows all activities)
+    # - When difficulty is "all": Only show activities without a difficulty field
+    # - When difficulty is a specific level (e.g., "Beginner"): Only show activities with that difficulty
     if difficulty:
         if difficulty == "all":
-            # Only show activities without a difficulty field
+            # Only show activities without a difficulty field (for students of all levels)
             query["difficulty"] = {"$exists": False}
         else:
-            # Show activities with the specified difficulty
+            # Show activities with the specified difficulty level
             query["difficulty"] = difficulty
     
     # Query the database

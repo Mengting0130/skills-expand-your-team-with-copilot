@@ -396,9 +396,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Handle difficulty filter
-      // Empty string means "All Levels" (show everything, no filtering)
-      // "all" means show only activities without a difficulty level specified
-      // Specific difficulty values filter to that level
+      // - Empty string (default): "All Levels" - no parameter sent, backend shows all activities
+      // - "all": "No Difficulty" - backend filters to activities without difficulty field
+      // - Specific value (e.g., "Beginner"): backend filters to activities with that difficulty
+      // Only send the parameter if currentDifficulty has a value (not empty string)
       if (currentDifficulty) {
         queryParams.push(`difficulty=${encodeURIComponent(currentDifficulty)}`);
       }
