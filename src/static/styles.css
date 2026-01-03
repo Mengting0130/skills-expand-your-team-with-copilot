@@ -1,18 +1,18 @@
 /* Color palette */
 :root {
-  /* Primary colors */
+  /* Primary colors - these CSS variables define the primary colors used throughout the site */
   --primary: #1a237e;
   --primary-light: #534bae;
   --primary-dark: #000051;
   --primary-text: #ffffff;
 
-  /* Secondary colors */
+  /* Secondary colors - these are used for accent elements like buttons */
   --secondary: #ff6f00;
   --secondary-light: #ffa040;
   --secondary-dark: #c43e00;
   --secondary-text: #ffffff;
 
-  /* Neutral colors */
+  /* Neutral colors - these control the background, text, and borders */
   --background: #f5f5f5;
   --surface: #ffffff;
   --text-primary: #333333;
@@ -21,7 +21,7 @@
   --border-light: #f0f0f0;
   --border-focus: #d0d0d0;
 
-  /* Feedback colors */
+  /* Feedback colors - used for success, warning, error, and info messages */
   --success: #2e7d32;
   --success-light: #e8f5e9;
   --warning: #ff9800;
@@ -30,6 +30,40 @@
   --error-light: #ffebee;
   --info: #0c5460;
   --info-light: #d1ecf1;
+}
+
+/* Dark mode color palette - applied when dark-mode class is on body element */
+body.dark-mode {
+  /* Primary colors adjusted for dark mode - slightly lighter for better contrast */
+  --primary: #3949ab;
+  --primary-light: #6f79d4;
+  --primary-dark: #1a237e;
+  --primary-text: #ffffff;
+
+  /* Secondary colors remain vibrant in dark mode */
+  --secondary: #ff9800;
+  --secondary-light: #ffb74d;
+  --secondary-dark: #f57c00;
+  --secondary-text: #000000;
+
+  /* Neutral colors inverted for dark mode - dark backgrounds with light text */
+  --background: #121212;
+  --surface: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border: #333333;
+  --border-light: #2a2a2a;
+  --border-focus: #404040;
+
+  /* Feedback colors adjusted for dark mode with better contrast */
+  --success: #4caf50;
+  --success-light: #1b5e20;
+  --warning: #ffa726;
+  --warning-light: #663c00;
+  --error: #ef5350;
+  --error-light: #7f0000;
+  --info: #29b6f6;
+  --info-light: #003d4d;
 }
 
 * {
@@ -663,4 +697,45 @@ footer {
 
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode toggle button - positioned in the top left corner of the header */
+#theme-toggle {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  border: none;
+  padding: 0;
+}
+
+/* Hover effect for the theme toggle button */
+#theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: rotate(20deg);
+}
+
+/* Icon styles for the sun and moon emojis in the toggle button */
+.theme-icon {
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+/* Show sun icon in light mode, hide in dark mode */
+body:not(.dark-mode) .theme-icon.moon {
+  display: none;
+}
+
+/* Show moon icon in dark mode, hide in light mode */
+body.dark-mode .theme-icon.sun {
+  display: none;
 }
