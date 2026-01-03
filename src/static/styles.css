@@ -699,7 +699,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Dark mode toggle button - positioned in the top right corner of the header */
+/* Dark mode toggle button - positioned in the top left corner of the header */
 #theme-toggle {
   position: absolute;
   top: 10px;
