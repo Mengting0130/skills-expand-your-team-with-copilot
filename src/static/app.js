@@ -633,13 +633,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const activityUrl = `${window.location.origin}${window.location.pathname}#activity-${encodeURIComponent(name)}`;
       try {
         await navigator.clipboard.writeText(activityUrl);
-        // Show temporary success message by changing the button text
+        // Show temporary success message by changing the button text and adding success class
         const originalIcon = copyLinkBtn.querySelector('.share-icon').textContent;
         copyLinkBtn.querySelector('.share-icon').textContent = '✓';
-        copyLinkBtn.style.backgroundColor = '#2e7d32';
+        copyLinkBtn.classList.add('copy-success');
         setTimeout(() => {
           copyLinkBtn.querySelector('.share-icon').textContent = originalIcon;
-          copyLinkBtn.style.backgroundColor = '';
+          copyLinkBtn.classList.remove('copy-success');
         }, 2000);
       } catch (error) {
         console.error('Failed to copy link:', error);

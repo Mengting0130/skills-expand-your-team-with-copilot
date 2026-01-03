@@ -259,7 +259,7 @@ section h3 {
 
 /* Individual share button styling */
 .share-button {
-  background-color: #f0f0f0;
+  background-color: var(--border-light);
   border: 1px solid var(--border);
   border-radius: 50%;
   width: 32px;
@@ -302,9 +302,16 @@ section h3 {
 
 /* Copy link button - uses success green */
 .copy-link:hover {
-  background-color: #2e7d32;
+  background-color: var(--success);
   color: white;
-  border-color: #2e7d32;
+  border-color: var(--success);
+}
+
+/* Success state when link is copied - uses the same success color */
+.copy-success {
+  background-color: var(--success) !important;
+  color: white !important;
+  border-color: var(--success) !important;
 }
 
 /* Icon styling inside share buttons */
