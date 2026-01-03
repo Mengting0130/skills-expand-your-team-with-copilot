@@ -27,20 +27,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark mode toggle elements
   const themeToggle = document.getElementById("theme-toggle");
-  const themeIcon = themeToggle.querySelector(".theme-icon");
+  const themeIcon = themeToggle ? themeToggle.querySelector(".theme-icon") : null;
 
   // Dark mode initialization - Check if user has a saved theme preference
   function initializeDarkMode() {
-    // Get the saved theme preference from localStorage (persists across page refreshes)
-    const savedTheme = localStorage.getItem("theme");
-    
-    // If user previously selected dark mode, apply it
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark-mode");
-      themeIcon.textContent = "☀️"; // Show sun icon when in dark mode
-    } else {
-      // Default to light mode
-      themeIcon.textContent = "🌙"; // Show moon icon when in light mode
+    // Return early if theme toggle elements are not found
+    if (!themeToggle || !themeIcon) {
+      console.warn("Theme toggle elements not found");
+      return;
+    }
+
+    try {
+      // Get the saved theme preference from localStorage (persists across page refreshes)
+      const savedTheme = localStorage.getItem("theme");
+      
+      // If user previously selected dark mode, apply it
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeIcon.textContent = "☀️"; // Show sun icon when in dark mode
+      } else {
+        // Default to light mode
+        themeIcon.textContent = "🌙"; // Show moon icon when in light mode
+      }
+    } catch (error) {
+      // Handle localStorage access errors (e.g., private browsing mode, quota exceeded)
+      console.warn("Could not access localStorage for theme preference:", error);
+      // Default to light mode if localStorage is not available
+      themeIcon.textContent = "🌙";
     }
   }
 
@@ -55,15 +68,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the icon based on current mode
     if (isDarkMode) {
       themeIcon.textContent = "☀️"; // Show sun icon in dark mode (clicking will bring light)
-      localStorage.setItem("theme", "dark"); // Save preference to localStorage
+      try {
+        localStorage.setItem("theme", "dark"); // Save preference to localStorage
+      } catch (error) {
+        // Handle localStorage write errors silently (feature degrades gracefully)
+        console.warn("Could not save theme preference:", error);
+      }
     } else {
       themeIcon.textContent = "🌙"; // Show moon icon in light mode (clicking will bring dark)
-      localStorage.setItem("theme", "light"); // Save preference to localStorage
+      try {
+        localStorage.setItem("theme", "light"); // Save preference to localStorage
+      } catch (error) {
+        // Handle localStorage write errors silently (feature degrades gracefully)
+        console.warn("Could not save theme preference:", error);
+      }
     }
   }
 
   // Event listener for theme toggle button
-  themeToggle.addEventListener("click", toggleDarkMode);
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleDarkMode);
+  }
 
   // Activity categories with corresponding colors
   const activityTypes = {
