@@ -25,6 +25,71 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
 
+  // Dark mode toggle elements
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = themeToggle ? themeToggle.querySelector(".theme-icon") : null;
+
+  // Dark mode initialization - Check if user has a saved theme preference
+  function initializeDarkMode() {
+    // Return early if theme toggle elements are not found
+    if (!themeToggle || !themeIcon) {
+      console.warn("Theme toggle elements not found");
+      return;
+    }
+
+    try {
+      // Get the saved theme preference from localStorage (persists across page refreshes)
+      const savedTheme = localStorage.getItem("theme");
+      
+      // If user previously selected dark mode, apply it
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeIcon.textContent = "☀️"; // Show sun icon when in dark mode
+      } else {
+        // Default to light mode
+        themeIcon.textContent = "🌙"; // Show moon icon when in light mode
+      }
+    } catch (error) {
+      // Handle localStorage access errors (e.g., private browsing mode, quota exceeded)
+      console.warn("Could not access localStorage for theme preference:", error);
+      // Default to light mode if localStorage is not available
+      themeIcon.textContent = "🌙";
+    }
+  }
+
+  // Toggle dark mode function - Switches between light and dark themes
+  function toggleDarkMode() {
+    // Toggle the dark-mode class on the body element
+    document.body.classList.toggle("dark-mode");
+    
+    // Check if dark mode is now active
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    
+    // Update the icon based on current mode
+    if (isDarkMode) {
+      themeIcon.textContent = "☀️"; // Show sun icon in dark mode (clicking will bring light)
+      try {
+        localStorage.setItem("theme", "dark"); // Save preference to localStorage
+      } catch (error) {
+        // Handle localStorage write errors silently (feature degrades gracefully)
+        console.warn("Could not save theme preference:", error);
+      }
+    } else {
+      themeIcon.textContent = "🌙"; // Show moon icon in light mode (clicking will bring dark)
+      try {
+        localStorage.setItem("theme", "light"); // Save preference to localStorage
+      } catch (error) {
+        // Handle localStorage write errors silently (feature degrades gracefully)
+        console.warn("Could not save theme preference:", error);
+      }
+    }
+  }
+
+  // Event listener for theme toggle button
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleDarkMode);
+  }
+
   // Activity categories with corresponding colors
   const activityTypes = {
     sports: { label: "Sports", color: "#e8f5e9", textColor: "#2e7d32" },
@@ -863,6 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize app
+  initializeDarkMode(); // Initialize dark mode based on saved preference
   checkAuthentication();
   initializeFilters();
   fetchActivities();

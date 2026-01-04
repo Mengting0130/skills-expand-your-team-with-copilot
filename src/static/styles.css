@@ -1,18 +1,18 @@
-/* Color palette */
+/* Color palette - Light mode (default) */
 :root {
-  /* Primary colors */
+  /* Primary colors - These colors represent school branding for headers and main UI elements */
   --primary: #1a237e;
   --primary-light: #534bae;
   --primary-dark: #000051;
   --primary-text: #ffffff;
 
-  /* Secondary colors */
+  /* Secondary colors - Used for call-to-action buttons and highlights */
   --secondary: #ff6f00;
   --secondary-light: #ffa040;
   --secondary-dark: #c43e00;
   --secondary-text: #ffffff;
 
-  /* Neutral colors */
+  /* Neutral colors - Base colors for backgrounds, text, and borders */
   --background: #f5f5f5;
   --surface: #ffffff;
   --text-primary: #333333;
@@ -21,7 +21,7 @@
   --border-light: #f0f0f0;
   --border-focus: #d0d0d0;
 
-  /* Feedback colors */
+  /* Feedback colors - Status colors for success, warning, error messages */
   --success: #2e7d32;
   --success-light: #e8f5e9;
   --warning: #ff9800;
@@ -30,6 +30,40 @@
   --error-light: #ffebee;
   --info: #0c5460;
   --info-light: #d1ecf1;
+}
+
+/* Dark mode color palette - Modern professional style inspired by L'Oréal Brandstorm */
+body.dark-mode {
+  /* Primary colors - Deep navy and sophisticated purple gradient */
+  --primary: #1a1f3a;
+  --primary-light: #2d3561;
+  --primary-dark: #0f1324;
+  --primary-text: #ffffff;
+
+  /* Secondary colors - Vibrant orange/coral for L'Oréal-inspired accents */
+  --secondary: #ff6b35;
+  --secondary-light: #ff8c5a;
+  --secondary-dark: #e04e1f;
+  --secondary-text: #ffffff;
+
+  /* Neutral colors - Modern dark blue backgrounds with clean white text */
+  --background: #0a0e1a;
+  --surface: #151b2e;
+  --text-primary: #ffffff;
+  --text-secondary: #a8b2d1;
+  --border: #2d3561;
+  --border-light: #1f2540;
+  --border-focus: #3d4773;
+
+  /* Feedback colors - Professional yet vibrant palette */
+  --success: #10b981;
+  --success-light: #064e3b;
+  --warning: #f59e0b;
+  --warning-light: #78350f;
+  --error: #ef4444;
+  --error-light: #7f1d1d;
+  --info: #3b82f6;
+  --info-light: #1e3a8a;
 }
 
 * {
@@ -617,6 +651,9 @@ footer {
   position: absolute;
   top: 10px;
   right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #user-status {
@@ -663,4 +700,34 @@ footer {
 
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode toggle button - Located in the top right corner of header */
+#theme-toggle {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+#theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Icon styling inside the toggle button */
+.theme-icon {
+  transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover .theme-icon {
+  transform: rotate(20deg);
 }
