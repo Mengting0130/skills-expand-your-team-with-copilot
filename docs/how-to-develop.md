@@ -61,8 +61,22 @@ These dependencies will be installed when you run `pip install -r src/requiremen
 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
-| GET    | `/activities`                                                     | Get all activities with their details and current participant count |
+| GET    | `/activities`                                                     | Get all activities with their details and current participant count. Supports optional query parameters: `day`, `start_time`, `end_time`, `difficulty` |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+
+#### Filtering Activities
+
+The `/activities` endpoint supports the following optional filters:
+
+- **day**: Filter by day of the week (e.g., `Monday`, `Tuesday`)
+- **start_time**: Filter by start time in 24-hour format (e.g., `07:00`)
+- **end_time**: Filter by end time in 24-hour format (e.g., `17:00`)
+- **difficulty**: Filter by difficulty level
+  - Leave empty or omit for all activities
+  - Use `all` for activities without a difficulty level (suitable for all students)
+  - Use `Beginner`, `Intermediate`, or `Advanced` for specific difficulty levels
+
+Example: `/activities?day=Monday&difficulty=Beginner`
 
 > [!IMPORTANT]
 > All data is stored in memory, which means data will be reset when the server restarts.
