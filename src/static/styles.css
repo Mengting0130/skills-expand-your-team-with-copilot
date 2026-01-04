@@ -32,38 +32,38 @@
   --info-light: #d1ecf1;
 }
 
-/* Dark mode color palette - Punk style with vibrant neon colors and high contrast */
+/* Dark mode color palette - Modern professional style inspired by L'Oréal Brandstorm */
 body.dark-mode {
-  /* Primary colors - Electric purple/blue for edgy punk aesthetic */
-  --primary: #7b2cbf;
-  --primary-light: #9d4edd;
-  --primary-dark: #5a189a;
+  /* Primary colors - Deep navy and sophisticated purple gradient */
+  --primary: #1a1f3a;
+  --primary-light: #2d3561;
+  --primary-dark: #0f1324;
   --primary-text: #ffffff;
 
-  /* Secondary colors - Hot pink/magenta for bold punk look */
-  --secondary: #ff006e;
-  --secondary-light: #ff1985;
-  --secondary-dark: #d90058;
+  /* Secondary colors - Vibrant orange/coral for L'Oréal-inspired accents */
+  --secondary: #ff6b35;
+  --secondary-light: #ff8c5a;
+  --secondary-dark: #e04e1f;
   --secondary-text: #ffffff;
 
-  /* Neutral colors - Pure black background with bright text for maximum contrast */
-  --background: #000000;
-  --surface: #0d0d0d;
+  /* Neutral colors - Modern dark blue backgrounds with clean white text */
+  --background: #0a0e1a;
+  --surface: #151b2e;
   --text-primary: #ffffff;
-  --text-secondary: #c77dff;
-  --border: #7b2cbf;
-  --border-light: #5a189a;
-  --border-focus: #9d4edd;
+  --text-secondary: #a8b2d1;
+  --border: #2d3561;
+  --border-light: #1f2540;
+  --border-focus: #3d4773;
 
-  /* Feedback colors - Neon colors for punk vibe */
-  --success: #39ff14;
-  --success-light: #1a5e1a;
-  --warning: #ffea00;
-  --warning-light: #665c00;
-  --error: #ff0054;
-  --error-light: #660021;
-  --info: #00f5ff;
-  --info-light: #006b75;
+  /* Feedback colors - Professional yet vibrant palette */
+  --success: #10b981;
+  --success-light: #064e3b;
+  --warning: #f59e0b;
+  --warning-light: #78350f;
+  --error: #ef4444;
+  --error-light: #7f1d1d;
+  --info: #3b82f6;
+  --info-light: #1e3a8a;
 }
 
 * {
